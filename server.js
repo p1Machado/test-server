@@ -1,15 +1,15 @@
-{
-  "name": "test-server",
-  "version": "1.0.0",
-  "description": "A http server that returns the request headers",
-  "author": "Patrick Machado <paamachado.93@gmail.com>",
-  "license": "ISC",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "dependencies": {
-    "express": "^4.17.1"
-  }
-} 
+const express = require("express");
+const app = express();
+const port = 3000;
+
+app.all("/*", (req, res) => {
+  res.json({
+    url: req.url,
+    method: req.method,
+    headers: req.headers,
+  });
+});
+
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`);
+});
